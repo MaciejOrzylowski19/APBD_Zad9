@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductService, ProductServiceAlternative>();
 
 builder.Services.AddOpenApi();
 
@@ -26,6 +27,5 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers();
-
 
 app.Run();

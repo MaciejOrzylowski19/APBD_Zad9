@@ -4,7 +4,7 @@ using Microsoft.Data.SqlClient;
 
 namespace APBD_Zaj9.Services;
 
-public class ProductServiceAlternative : IProductService
+public class ProductServiceAlternative : IProductServiceAlt
 {
     
     private readonly IConfiguration _configuration;

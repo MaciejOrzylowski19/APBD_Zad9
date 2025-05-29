@@ -9,10 +9,12 @@ namespace APBD_Zaj9.Controllers;
 public class WarehouseController : ControllerBase
 {
     private IProductService _productService { get; set; }
+    private IProductServiceAlt _productServiceAlt { get; set; }
     
     
-    public WarehouseController(IProductService productService)
+    public WarehouseController(IProductService productService, IProductServiceAlt productServiceAlt)
     {
+        _productServiceAlt = productServiceAlt;
         _productService = productService;
     }
     
@@ -37,6 +39,33 @@ public class WarehouseController : ControllerBase
             case -6:
                 return BadRequest("The order does not exist.");
         }
+
+        return Ok(result);
+    }
+    
+    [HttpPut]
+    [Route("alt")]
+    public async Task<IActionResult> AddProductAlt([FromBody] ProductDTO product)
+    {
+        
+        var result = await _productServiceAlt.addProduct(product);
+
+        switch (result)
+        {
+            case -1:
+                return BadRequest("Invalid amount.");
+            case -2:
+                return BadRequest("Product does not exist.");
+            case -3:
+                return BadRequest("Warehouse does not exist.");
+            case -4:
+                return BadRequest("Invalid date.");
+            case -5:
+                return BadRequest("The amount exceeds available stock.");
+            case -6:
+                return BadRequest("The order does not exist.");
+        }
+
         return Ok(result);
     }
     
